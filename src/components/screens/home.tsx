@@ -1,8 +1,9 @@
 import React from 'react'
 import { Plus } from 'phosphor-react-native'
-import { Switch } from 'react-native'
+import { Switch, TextInput } from 'react-native'
 import styled from 'styled-components/native'
 
+import { getShoppingList } from '@/lib/db'
 import List from '@/components/list'
 
 import { useThemeSwitcher } from '../providers/theme-provider'
@@ -10,6 +11,9 @@ import { useThemeSwitcher } from '../providers/theme-provider'
 export default function HomeScreen() {
   const { isDarkMode, toggleTheme, theme } = useThemeSwitcher()
 
+  const data = getShoppingList()
+
+  console.log(data)
   return (
     <Container>
       <Heading>
@@ -25,6 +29,8 @@ export default function HomeScreen() {
       </Heading>
 
       <List />
+
+      <TextInput />
       <Switch onValueChange={toggleTheme} value={isDarkMode} />
     </Container>
   )

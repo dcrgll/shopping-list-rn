@@ -1,3 +1,5 @@
+import 'react-native-reanimated'
+
 import { ThemeProvider } from '@/components/providers/theme-provider'
 
 import Layout from './components/layout'
