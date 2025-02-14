@@ -54,5 +54,11 @@ module.exports = {
     'no-global-assign': 0,
     quotes: 0,
     'space-before-function-paren': 0
+  },
+  settings: {
+   'import/resolver': {
+      typescript: {
+        project: './tsconfig.json',
+      }
   }
 }
