@@ -1,3 +1,5 @@
+import 'styled-components'
+
 export enum Theme {
   LIGHT = 'light',
   DARK = 'dark'

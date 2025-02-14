@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { Appearance } from 'react-native'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components/native'
+import {
+  DefaultTheme,
+  ThemeProvider as StyledThemeProvider
+} from 'styled-components/native'
 
 import { darkTheme, lightTheme } from '@/lib/theme'
 
@@ -8,6 +11,7 @@ import { darkTheme, lightTheme } from '@/lib/theme'
 interface ThemeContextType {
   isDarkMode: boolean
   toggleTheme: () => void
+  theme: DefaultTheme
 }
 
 // Create Context
@@ -20,7 +24,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-      console.log('colorScheme', colorScheme)
       setIsDarkMode(colorScheme === 'dark') // Force update
     })
 
@@ -31,11 +34,17 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     setIsDarkMode((prev) => !prev)
   }
 
+  const whichTheme = isDarkMode ? darkTheme : lightTheme
+
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-      <StyledThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-        {children}
-      </StyledThemeProvider>
+    <ThemeContext.Provider
+      value={{
+        isDarkMode,
+        toggleTheme,
+        theme: whichTheme
+      }}
+    >
+      <StyledThemeProvider theme={whichTheme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   )
 }
