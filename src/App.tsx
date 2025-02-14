@@ -1,19 +1,14 @@
-import { StatusBar } from 'expo-status-bar'
-import { Text } from 'react-native'
-import styled from 'styled-components/native'
+import { ThemeProvider } from '@/components/providers/theme-provider'
+
+import Layout from './components/layout'
+import HomeScreen from './components/screens/home'
 
 export default function App() {
   return (
-    <Container>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </Container>
+    <ThemeProvider>
+      <Layout>
+        <HomeScreen />
+      </Layout>
+    </ThemeProvider>
   )
 }
-
-const Container = styled.View`
-  align-items: center;
-  background-color: #fff;
-  flex: 1;
-  justify-content: center;
-`
